@@ -2,20 +2,31 @@ package neem.multiples;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
+
+import neem.multiples.helper.ArrayHelper;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.Mockito.*;
+import org.mockito.runners.MockitoJUnitRunner;
 
+@RunWith(MockitoJUnitRunner.class)
 public class MultiplesTest {
 
 	private Multiples testObject;
+	@Mock
+	ArrayHelper mockArrayHelper;
 
 	@Before
 	public void setUp() {
-		int maxValue = 10;
-		testObject = new Multiples(maxValue);	
+		testObject = new Multiples(mockArrayHelper);	
 	}
 	
 	@Test
@@ -24,7 +35,7 @@ public class MultiplesTest {
 		List<Integer> testList = Arrays.asList(3, 6, 9);
 
 		//Act
-		List<Integer> result = testObject.threes(10);
+		List<Integer> result = testObject.findMultiples(10, 3);
 		
 		//Assert
 		assertEquals(testList, result);
@@ -36,7 +47,7 @@ public class MultiplesTest {
 		List<Integer> testList = Arrays.asList(5);
 
 		//Act
-		List<Integer> result = testObject.fives(10);
+		List<Integer> result = testObject.findMultiples(10, 5);
 		
 		//Assert
 		assertEquals(testList, result);
@@ -45,29 +56,21 @@ public class MultiplesTest {
 	@Test
 	public final void testSum() {
 		//Assemble
-		int testFinalSum = 23;
+		List<Integer> list0 = Mockito.mock(ArrayList.class);
+		List<Integer> list1 = Mockito.mock(ArrayList.class);
+		List<Integer> combinedList = Mockito.mock(ArrayList.class);
+		Integer sum = new Random().nextInt();
+		
+		Mockito.when(mockArrayHelper.combineLists(list0, list1)).thenReturn(combinedList);
+		Mockito.when(mockArrayHelper.sumList(combinedList)).thenReturn(sum);
+		
 		
 		//Act
-		List<Integer> threes = Arrays.asList(3, 6, 9);
-		List<Integer> fives = Arrays.asList(5);		
-		int finalSum = testObject.sum(threes, fives);
+		Integer result = testObject.sum(list0, list1);
 		
 		//Assert
-		assertEquals(testFinalSum, finalSum);
+		assertEquals(sum, result);
 		
-	}
-
-	@Test
-	public final void testProcess() {
-		//Assemble
-		int maxValue = 10;
-		int testSum = 23;
-		
-		//Act
-		int finalSum = testObject.process(maxValue);
-		
-		//Assert
-		assertEquals(testSum, finalSum);
 	}
 
 }

@@ -3,56 +3,34 @@ package neem.multiples;
 import java.util.ArrayList;
 import java.util.List;
 
+import neem.multiples.helper.ArrayHelper;
+
 public class Multiples {
-	int maxValue;
-	
-	public Multiples(int numberToTest) {
-		maxValue = numberToTest;
+
+	private ArrayHelper arrayHelper;
+
+
+	public Multiples(ArrayHelper arrayHelper) {
+		this.arrayHelper = arrayHelper;
 	}
 
-	public List<Integer> threes(int maxValue) {
-		List<Integer> threeMult = new ArrayList<Integer>();
-		for (int index = 1; index < maxValue; index++){
-			if (index%3 == 0){
-				threeMult.add(index);
+
+	public int sum(List<Integer> list0, List<Integer> list1) {
+		
+		List<Integer> combinedList = arrayHelper.combineLists(list0, list1);
+		return arrayHelper.sumList(combinedList);
+		
+	}
+
+
+	public List<Integer> findMultiples(int maximumValue, int multipleNumber) {
+		List<Integer> mult = new ArrayList<Integer>();
+		for (int index = 1; index < maximumValue; index++){
+			if (index % multipleNumber == 0){
+				mult.add(index);
 			}
 		}
-		return threeMult;
-	}
-
-	public List<Integer> fives(int maxValue) {
-		List<Integer>  fivesMult = new ArrayList<Integer>();
-		for (int index = 1; index < maxValue; index++){
-			if (index%5 == 0){
-				fivesMult.add(index);
-			}
-		}
-		return fivesMult;
-	}
-
-	public int sum(List<Integer> threes, List<Integer> fives) {
-		int finalSum = 0;
-		
-		for (int index=0; index< threes.size(); index++)
-		{
-			finalSum += threes.get(index);
-		}
-		
-		for (int index=0; index< fives.size(); index++)
-		{
-			if (!threes.contains(fives.get(index))){
-				finalSum += fives.get(index);
-			}
-		}
-		
-		return finalSum;
-	}
-
-	public int process(int maxValue) {
-		List<Integer> threesList = threes(maxValue);
-		List<Integer> fivesList = fives(maxValue);
-		int finalSum = sum(threesList, fivesList);
-		return finalSum;
+		return mult;
 	}
 
 }
