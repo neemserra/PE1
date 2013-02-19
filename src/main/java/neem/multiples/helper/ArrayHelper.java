@@ -1,14 +1,17 @@
 package neem.multiples.helper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ArrayHelper {
 
 	public List<Integer> combineLists(List<Integer> list0, List<Integer> list1) {
-		List<Integer> combinedList = list0;
+		List<Integer> combinedList = new ArrayList<Integer>();
+		combinedList.addAll(list0);
 		for (int index = 0; index < list1.size(); index++){
-			if (!list0.contains(list1.get(index)))
+			if (!list0.contains(list1.get(index))){
 				combinedList.add(list1.get(index));
+			}
 		}
 		return combinedList;
 	}
