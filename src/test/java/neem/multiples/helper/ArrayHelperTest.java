@@ -2,9 +2,7 @@ package neem.multiples.helper;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,11 +25,9 @@ public class ArrayHelperTest {
 	@Test
 	public void testCombineLists() {
 		//Assemble
-		List<Integer> list0 = Mockito.mock(ArrayList.class);
-		List<Integer> list1 = Mockito.mock(ArrayList.class);
-		List<Integer> combinedList = Mockito.mock(ArrayList.class);
-		
-		Mockito.when(mockArrayHelper.combineLists(list0, list1)).thenReturn(combinedList);
+		final List<Integer> list0 = Arrays.aslist(3, 4, 5);
+		final List<Integer> list1 = Arrays.aslist(5, 6, 7);
+		final List<Integer> combinedList = Arrays.aslist(3, 4, 5, 6, 7);
 		
 		//Act
 		List<Integer> result = mockArrayHelper.combineLists(list0, list1);
@@ -44,22 +40,14 @@ public class ArrayHelperTest {
 	@Test
 	public void testSumList() {
 		//Assemble
-		List<Integer> list0 = Mockito.mock(ArrayList.class);
-		List<Integer> list1 = Mockito.mock(ArrayList.class);
-		List<Integer> combinedList = Mockito.mock(ArrayList.class);
-		Integer sum = new Random().nextInt();
-		
-		Mockito.when(mockArrayHelper.combineLists(list0, list1)).thenReturn(combinedList);
-		Mockito.when(mockArrayHelper.sumList(combinedList)).thenReturn(sum);
-		
+		final List<Integer> combinedList = Arrays.aslist(3, 4, 5, 6, 7);
+		Integer sum = 25;
 		
 		//Act
 		Integer result = mockArrayHelper.sumList(combinedList);
 		
 		//Assert
 		assertEquals(sum, result);
-		
-
 	}
 	
 	
